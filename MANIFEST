@@ -10,3 +10,5 @@ t/compare.t
 t/dumper.t
 t/freezethaw.t
 t/storable.t
+t/storable_dbfile.t
+META.yml                                 Module meta-data (added by MakeMaker)

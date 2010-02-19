@@ -1,14 +1,15 @@
 #!/usr/bin/perl -w
 
 use Fcntl;
-use MLDBM qw(SDBM_File Storable);
+use MLDBM qw(DB_File Storable);
 use Data::Dumper;
 use strict;
 use Test::More tests => 9;
 
-plan skip_all => "Optional module (Storable) not installed"
+plan skip_all => "Optional module (DB_File,Storable) not installed"
   unless eval {
                require Storable;
+               require DB_File;
               };
 tie my %o, 'MLDBM', 'testmldbm', O_CREAT|O_RDWR, 0640 or die $!;
 

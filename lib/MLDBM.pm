@@ -80,7 +80,7 @@ sub _attrib {
 ####################################################################
 package MLDBM;
 
-$MLDBM::VERSION = $MLDBM::VERSION = '2.01';
+$MLDBM::VERSION = $MLDBM::VERSION = '2.02';
 
 require Tie::Hash;
 @MLDBM::ISA = 'Tie::Hash';
@@ -128,7 +128,7 @@ sub TIEHASH {
     unless (ref $szr) {
 	$szr = "MLDBM::Serializer::$szr"	# allow convenient short names
 	  unless $szr =~ /^MLDBM::Serializer::/;
-	&$loadpack($szr) or return undef;
+	$loadpack->($szr) or return undef;
 	$szr = $szr->new($MLDBM::DumpMeth,
 			 $MLDBM::RemoveTaint,
 			 $MLDBM::Key);
@@ -139,7 +139,7 @@ sub TIEHASH {
     # Create the right TIEHASH  object.
     my $db = $MLDBM::UseDB;
     unless (ref $db) {
-	&$loadpack($db) or return undef;
+	$loadpack->($db) or return undef;
 	$db = $db->TIEHASH(@_)
 	  or carp "MLDBM error: Second level tie failed, \"$!\""
 	    and return undef;
@@ -264,14 +264,14 @@ __END__
 
 =head1 NAME
 
-MLDBM - store multi-level hash structure in single level tied hash
+MLDBM - store multi-level Perl hash structure in single level tied hash
 
 =head1 SYNOPSIS
 
     use MLDBM;				# this gets the default, SDBM
     #use MLDBM qw(DB_File FreezeThaw);	# use FreezeThaw for serializing
     #use MLDBM qw(DB_File Storable);	# use Storable for serializing
-    
+
     $dbm = tie %o, 'MLDBM' [..other DBM args..] or die $!;
 
 =head1 DESCRIPTION
@@ -412,9 +412,9 @@ serializing package--most real life examples should not, usually.
     use MLDBM;				# this gets SDBM and Data::Dumper
     #use MLDBM qw(SDBM_File Storable);	# SDBM and Storable
     use Fcntl;				# to get 'em constants
-     
+
     $dbm = tie %o, 'MLDBM', 'testmldbm', O_CREAT|O_RDWR, 0640 or die $!;
-    
+
     $c = [\ 'c'];
     $b = {};
     $a = [1, $b, $c];
@@ -422,20 +422,20 @@ serializing package--most real life examples should not, usually.
     $b->{b} = $a->[1];
     $b->{c} = $a->[2];
     @o{qw(a b c)} = ($a, $b, $c);
-    
+
     #
     # to see what was stored
     #
     use Data::Dumper;
     print Data::Dumper->Dump([@o{qw(a b c)}], [qw(a b c)]);
-    
+
     #
     # to modify data in a substructure
     #
     $tmp = $o{a};
     $tmp->[0] = 'foo';
     $o{a} = $tmp;
-    
+
     #
     # can access the underlying DBM methods transparently
     #
@@ -444,12 +444,12 @@ serializing package--most real life examples should not, usually.
 Here is another small example using Storable, in a portable format:
 
     use MLDBM qw(DB_File Storable);	# DB_File and Storable
-    
+
     tie %o, 'MLDBM', 'testmldbm', O_CREAT|O_RDWR, 0640 or die $!;
-    
+
     (tied %o)->DumpMeth('portable');	# Ask for portable binary
     $o{'ENV'} = \%ENV;			# Stores the whole environment
-    
+
 
 =head1 BUGS
 
@@ -538,6 +538,8 @@ Copyright (c) 1998 Raphael Manfredi.
 
 Copyright (c) 2002 Josh Chamas, Chamas Enterprises Inc.
 
+Copyright (c) 2010 Alexandr Ciornii.
+
 This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
@@ -547,6 +549,6 @@ Version 2.01	07 July 2002
 
 =head1 SEE ALSO
 
-perl(1), perltie(1), perlfunc(1), Data::Dumper(3), FreezeThaw(3), Storable(3).
+perl(1), perltie(1), perlfunc(1), Data::Dumper(3), FreezeThaw(3), Storable(3), DBM::Deep.
 
 =cut
