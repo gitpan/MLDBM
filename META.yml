@@ -1,24 +1,34 @@
---- #YAML:1.0
-name:               MLDBM
-version:            2.02
-abstract:           ~
-author:  []
-license:            perl
-distribution_type:  module
-configure_requires:
-    ExtUtils::MakeMaker:  0
+---
+abstract: 'store multi-level Perl hash structure in single level tied hash'
+author:
+  - 'Gurusamy Sarathy <F<gsar@umich.edu>>.'
+  - "Support for multiple serializing packages by\nRaphael Manfredi <F<Raphael_Manfredi@grenoble.hp.com>>."
 build_requires:
-    Test::More:  0
-requires:
-    Data::Dumper:  2.08
-    perl:          5.004
-resources:
-    repository:  git://github.com/chorny/MLDBM.git
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.56
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.36
+generated_by: 'Module::Build version 0.3603'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: MLDBM
+provides:
+  MLDBM:
+    file: lib/MLDBM.pm
+    version: 2.03
+  MLDBM::Serializer:
+    file: lib/MLDBM.pm
+  MLDBM::Serializer::Data::Dumper:
+    file: lib/MLDBM/Serializer/Data/Dumper.pm
+  MLDBM::Serializer::FreezeThaw:
+    file: lib/MLDBM/Serializer/FreezeThaw.pm
+  MLDBM::Serializer::Storable:
+    file: lib/MLDBM/Serializer/Storable.pm
+requires:
+  Data::Dumper: 2.08
+  perl: 5.004
+resources:
+  license: http://dev.perl.org/licenses/
+  repository: git://github.com/chorny/MLDBM.git
+version: 2.03
