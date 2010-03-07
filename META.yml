@@ -1,8 +1,8 @@
 ---
 abstract: 'store multi-level Perl hash structure in single level tied hash'
 author:
-  - 'Gurusamy Sarathy <F<gsar@umich.edu>>.'
-  - "Support for multiple serializing packages by\nRaphael Manfredi <F<Raphael_Manfredi@grenoble.hp.com>>."
+  - 'Gurusamy Sarathy <gsar@umich.edu>'
+  - 'Alexandr Ciornii (alexchorny@gmail.com)'
 build_requires:
   Test::More: 0
 configure_requires:
@@ -16,7 +16,7 @@ name: MLDBM
 provides:
   MLDBM:
     file: lib/MLDBM.pm
-    version: 2.03
+    version: 2.04
   MLDBM::Serializer:
     file: lib/MLDBM.pm
   MLDBM::Serializer::Data::Dumper:
@@ -31,4 +31,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/chorny/MLDBM.git
-version: 2.03
+version: 2.04
