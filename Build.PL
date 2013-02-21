@@ -8,12 +8,13 @@ my $build = Module::Build->new(
   },
   'module_name' => 'MLDBM',
   'requires' => {
-    'perl' => '5.004',
-    'Data::Dumper' => '2.08'
+    'perl' => '5.005',
+    'Data::Dumper' => '2.08',
+    'Carp' => 0,
   },
   'meta_merge' => {
     'resources' => {
-      'repository' => 'git://github.com/chorny/MLDBM.git'
+      'repository' => 'http://github.com/chorny/MLDBM/'
     }
   },
   'license' => 'perl',
@@ -22,6 +23,7 @@ my $build = Module::Build->new(
     'Gurusamy Sarathy <gsar@umich.edu>',
     'Alexandr Ciornii (alexchorny@gmail.com)',
   ],
+  'auto_configure_requires' => 0,
 );
 
 $build->create_build_script();

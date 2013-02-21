@@ -1,4 +1,4 @@
-use 5.004;
+use 5.005;
 use ExtUtils::MakeMaker;
 WriteMakefile1(
   NAME => "MLDBM",
@@ -6,16 +6,17 @@ WriteMakefile1(
   VERSION_FROM => 'lib/MLDBM.pm',
   PREREQ_PM => {
     'Data::Dumper' => '2.08',
+    'Carp' => 0,
   },
   BUILD_REQUIRES => {
     'Test::More' => 0,
   },
   'dist' => {COMPRESS=>'gzip -9f', SUFFIX => 'gz'},
   'LICENSE' => 'perl',
-  MIN_PERL_VERSION => '5.004',
+  MIN_PERL_VERSION => '5.005',
   META_MERGE => {
     resources => {
-      repository => 'git://github.com/chorny/MLDBM.git',
+      repository => 'http://github.com/chorny/MLDBM/',
     },
   },
   'PL_FILES' => {},

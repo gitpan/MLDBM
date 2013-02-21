@@ -9,12 +9,13 @@
 # Raphael Manfredi <Raphael_Manfredi@grenoble.hp.com>
 #
 
-require 5.004;
+require 5.005;
 use strict;
 
 ####################################################################
 package MLDBM::Serializer;	## deferred
 
+$MLDBM::Serializer::VERSION = $MLDBM::Serializer::VERSION = '2.05';
 use Carp;
 
 #
@@ -80,7 +81,7 @@ sub _attrib {
 ####################################################################
 package MLDBM;
 
-$MLDBM::VERSION = $MLDBM::VERSION = '2.04';
+$MLDBM::VERSION = $MLDBM::VERSION = '2.05';
 
 require Tie::Hash;
 @MLDBM::ISA = 'Tie::Hash';
@@ -538,17 +539,17 @@ Copyright (c) 1998 Raphael Manfredi.
 
 Copyright (c) 2002 Josh Chamas, Chamas Enterprises Inc.
 
-Copyright (c) 2010 Alexandr Ciornii (alexchorny@gmail.com).
+Copyright (c) 2010-2013 Alexandr Ciornii (alexchorny@gmail.com).
 
 This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
 =head1 VERSION
 
-Version 2.04	08 Mar 2010
+Version 2.05
 
 =head1 SEE ALSO
 
-perl(1), perltie(1), perlfunc(1), Data::Dumper(3), FreezeThaw(3), Storable(3), DBM::Deep.
+perl(1), perltie(1), perlfunc(1), L<Data::Dumper>, L<FreezeThaw>, L<Storable>, L<DBM::Deep>, L<MLDBM::Serializer::JSON>.
 
 =cut
